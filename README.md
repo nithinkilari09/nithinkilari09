@@ -1,8 +1,8 @@
 # Hi, I'm Nithin 👋
 
-M.S. in Computer Science (Data Science specialization) at **Oklahoma City University**, graduating **May 2026**. I build end-to-end data pipelines, analytics, and machine learning projects on real public datasets — not the usual Kaggle-tutorial stuff.
+M.S. in Computer Science (Data Science specialization) at **Oklahoma City University**, graduating **May 2026**. I build end-to-end data pipelines, analytics, and machine learning projects on real public datasets.
 
-Currently focused on data engineering, data science, data analytics, and business analytics roles.
+Currently focused on data engineering, data science, data analytics roles.
 
 ---
 
