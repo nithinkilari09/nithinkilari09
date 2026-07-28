@@ -10,6 +10,11 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Kilari_Nithin-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kilari-nithin-619481272/)
 [![Profile Views](https://komarev.com/ghpvc/?username=nithinkilari09&style=flat-square&color=58A6FF&label=Profile+Views)](https://github.com/nithinkilari09)
 
+**🎮 Try the dashboards live:**
+[![tech-skill-demand](https://img.shields.io/badge/tech--skill--demand-Live_Dashboard-brightgreen?style=for-the-badge&logo=googlechrome&logoColor=white)](https://nithinkilari09.github.io/tech-skill-demand-pipeline/)
+[![instacart](https://img.shields.io/badge/instacart--basket-Tableau_Public-brightgreen?style=for-the-badge&logo=tableau&logoColor=white)](https://public.tableau.com/app/profile/nithin.kilari/viz/instakart-basket-analysis/Dashboard1)
+[![physician-payments](https://img.shields.io/badge/physician--payments-Streamlit_App-brightgreen?style=for-the-badge&logo=streamlit&logoColor=white)](https://physician-payments-prescribing-ttfaduvzppgdwvuxfadjkq.streamlit.app/)
+
 </div>
 
 ---
@@ -39,10 +44,19 @@ for, by CS domain, updated daily with zero manual steps.
 
 - RemoteOK + Arbeitnow → **S3** → **Databricks** medallion (Bronze/Silver/Gold, PySpark
   + Delta Lake + Unity Catalog) → static **GitHub Pages** dashboard
-- 1,002 postings deduped, classified into a CS-domain taxonomy + 11 non-tech categories,
-  skills matched against a 61-entry curated dictionary
 - Fully scheduled, no human trigger: ingest 03:00 UTC → ETL 04:00 UTC → dashboard
   rebuild 06:00 UTC — every stage verified with a real triggered run
+
+<details>
+<summary><b>🔍 See the real numbers</b></summary>
+<br>
+
+- 1,002 postings deduped, classified into a CS-domain taxonomy + 11 non-tech categories
+- Skills matched against a 61-entry hand-curated dictionary, into a posting-to-skill fact table
+- 4 Gold Delta tables serve the dashboard straight off the Databricks SQL warehouse
+- No Snowflake/dbt here on purpose — kept for the sibling project below, so tooling never overlaps
+
+</details>
 
 `AWS S3` `Databricks` `PySpark` `Delta Lake` `Unity Catalog` `GitHub Actions` `Plotly`
 
@@ -59,10 +73,19 @@ geopolitical tension escalating *right now*.
 - GCS landing → **Snowflake** storage integration → Streams + Tasks (incremental
   loads) → **Snowpark** silver transforms → 5 SQL marts → **Streamlit-in-Snowflake**
   dashboard
+
+<details>
+<summary><b>🔍 See the real numbers</b></summary>
+<br>
+
 - Marts answer tension-by-region, event-type spikes vs. a 24h baseline, tone trend, and
   top-coverage countries — not a raw-field dump
+- `is_conflict` requires `avg_tone <= 0` in addition to GDELT's own QuadClass — a real
+  data-quality fix after GDELT miscoded historical/human-interest articles as conflict
 - Deliberately Snowflake-centric on GCP, complementing the AWS/Databricks stack next
   door so tooling doesn't overlap across the portfolio
+
+</details>
 
 `GCP · GCS` `Snowflake` `Snowpark` `Streams & Tasks` `Streamlit` `GitHub Actions`
 
@@ -86,10 +109,18 @@ business questions — churn, loyalty, timing, product strategy — not a generi
 
 - **BigQuery** (load + SQL) → **pandas** (confounder-aware analysis) → **Tableau**
   (5-panel published dashboard)
-- Real headline finding: reorder rate holds 55–68% up to 29 days since last order,
-  then cliffs to 45.8% at 30+ days
+
+<details>
+<summary><b>🔍 See the real numbers</b></summary>
+<br>
+
+- Reorder rate holds 55–68% up to 29 days since last order, then cliffs to 45.8% at 30+ days
 - 229 "anchor" products identified by reorder frequency + basket presence, not price —
   this dataset has no revenue field, and no chart here pretends otherwise
+- Controlling for the "heavy shopper" confound changes the top basket-growth product
+  list substantially — only 7/20 overlap with the naive ranking
+
+</details>
 
 `BigQuery` `SQL` `pandas` `Tableau`
 
@@ -102,14 +133,23 @@ Do industry payments to physicians correlate with brand-name prescribing? Same g
 of question as ProPublica's *Dollars for Docs*, framed strictly as association, not
 causation, with specialty controlled for throughout.
 
-**Streamlit dashboard** (Sankey, treemap, icicle decomposition) over **CMS Open
-Payments (14.3M rows) + Medicare Part D (1.38M rows)**, joined on NPI
+**🟢 [Live Streamlit dashboard →](https://physician-payments-prescribing-ttfaduvzppgdwvuxfadjkq.streamlit.app/)**
 
 - **S3 → Athena** (serverless SQL, no cluster) **→ pandas → Streamlit/Plotly**
-- Real finding: a modest but statistically robust payment↔brand-prescribing
-  association survives two independent confounder methods (ΔR² ≈ 0.0023–0.0025)
+- CMS Open Payments (14.3M rows) + Medicare Part D (1.38M rows), joined on NPI
+
+<details>
+<summary><b>🔍 See the real numbers</b></summary>
+<br>
+
+- A modest but statistically robust payment↔brand-prescribing association survives two
+  independent confounder methods (ΔR² ≈ 0.0023–0.0025)
 - Payments are highly concentrated: top 1% of paid physicians take 66% of all
   physician-directed dollars (Gini = 0.93)
+- 15,972 brand-rate + 17,917 opioid-rate outliers flagged via specialty-peer-group
+  z-scores — read as flags worth a second look, not an accusation
+
+</details>
 
 `AWS S3` `Athena` `Glue` `pandas` `Streamlit` `Plotly`
 
@@ -137,14 +177,12 @@ Payments (14.3M rows) + Medicare Part D (1.38M rows)**, joined on NPI
 
 ---
 
-## 📈 GitHub Stats
-
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=nithinkilari09&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" />
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=nithinkilari09&layout=compact&theme=tokyonight&hide_border=true" />
+### 🐍 Contribution snake
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=nithinkilari09&theme=tokyonight&hide_border=true" />
+![snake gif](https://raw.githubusercontent.com/nithinkilari09/nithinkilari09/output/github-contribution-grid-snake-dark.svg#gh-dark-mode-only)
+![snake gif](https://raw.githubusercontent.com/nithinkilari09/nithinkilari09/output/github-contribution-grid-snake.svg#gh-light-mode-only)
 
 </div>
 
